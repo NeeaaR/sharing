@@ -1,0 +1,2 @@
+hostname,snmp_community,snmp_contact,snmp_location,ntp_server,radius_server,spanning_tree_mode
+switch1,public,admin@example.com,HQ,192.168.1.11,,

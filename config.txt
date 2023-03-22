@@ -1,0 +1,38 @@
+!Sample Cisco configuration file
+!
+hostname switch1
+!
+interface Ethernet0/0
+ description Connection to router
+ ip address 192.168.1.1 255.255.255.0
+!
+interface Ethernet0/1
+ description Connection to server
+ ip address 10.0.0.1 255.255.255.0
+!
+interface Vlan10
+ description Management VLAN
+ ip address 172.16.0.1 255.255.255.0
+!
+ip default-gateway 192.168.1.254
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+enable secret 5 $1$28K8$V2Sjck.T0uIYwY4DN8jTk0
+!
+username admin privilege 15 secret 5 $1$BdDR$tbKjIXzY7PcLZ.Qrh2ITF1
+!
+snmp-server community public RO
+snmp-server contact admin@example.com
+snmp-server location HQ
+ntp server 192.168.1.11 prefer use-vrf management
+ntp server 192.168.2.10 use-vrf management
+!radius server host 10.0.5.10 key 7 <removed> authentication accounting timeout 2 retransmit 2 
+aaa group server radius RADIUS1
+    server 10.0.0.65
+    use vrf-management
+system default switchport
+!
+end
